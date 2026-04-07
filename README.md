@@ -4,7 +4,7 @@
 - nvim-tree (file manager)
 - undotree (for modification historique)
 - indent-blanklines (better indentation)
-For 42 c:
+#### For 42 c:
 - 42 header
 - ft_count_line
 
