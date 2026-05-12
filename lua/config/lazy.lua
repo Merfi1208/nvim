@@ -19,20 +19,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- Plugins
 require("lazy").setup({
-  spec = {
+	spec = {
     { import = "plugins" },
+    "wakatime/vim-wakatime",
+    {
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate"
+    },
   },
-  "wakatime/vim-wakatime",
   rocks = { enabled = false },
 })
-
--- restart lsp commande
-vim.keymap.set("n", "<leader>lr", function()
-	vim.cmd("LspStop")
-	vim.cmd("LspStart")
-end, { noremap = true, silent = true, desc = "Restart LSP" })
