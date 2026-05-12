@@ -33,5 +33,43 @@ vim.lsp.config('clangd', {
 -- On active le serveur
 vim.lsp.enable({'clangd'})
 
+-- ╔══════════════════════════════╗
+-- ║         LUA LSP             ║
+-- ╚══════════════════════════════╝
+
+vim.lsp.config('lua_ls', {
+    cmd = { "lua-language-server" },
+    filetypes = { "lua" },
+    settings = {
+        Lua = {
+            runtime = { 
+                version = 'Lua 5.1', 
+            },
+            diagnostics = {
+                globals = { 
+                    'vim', 
+                    'term', 'fs', 'os', 'redstone', 'rs', 
+                    'colors', 'colours', 'keys', 'peripheral', 
+                    'turtle', 'pocket', 'commands', 'http', 'gps',
+                    'window', 'textutils', 'vector', 'parallel',
+                    'coroutine', 'bit', 'settings', 'multishell'
+                },
+            },
+            workspace = {
+                library = {
+                    vim.api.nvim_get_runtime_file("", true),
+                    -- Attention, avec ce dépôt, il faut pointer vers le sous-dossier "library" :
+                    vim.fn.expand("~/.config/nvim/lua_libs/computercraft/library"), 
+                },
+                checkThirdParty = false,
+            },
+            telemetry = { enable = false },
+        },
+    },
+})
+
+vim.lsp.enable({ "lua_ls" })
+
+
 -- Raccourci pour afficher les erreurs LSP
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = "LSP: Show diagnostic float" })
