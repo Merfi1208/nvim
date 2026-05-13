@@ -4,10 +4,9 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
-		vim.g.loaded_netrw = 1
-		vim.g.loaded_netrwPlugin = 1
-
 		require("nvim-tree").setup({
+			disable_netrw = false,
+			hijack_netrw = false,
 			view = {
 				width = 40,
 				side = "left",
@@ -24,13 +23,6 @@ return {
 		})
 
 		-- Mappings
-		vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "NvimTree",
-			callback = function()
-				vim.keymap.set('n', '<Esc>', ':NvimTreeClose<CR>', { noremap = true, silent = true, buffer = true })
-			end,
-		})
+		vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true, desc = "Toggle NvimTree" })
 	end
 }
